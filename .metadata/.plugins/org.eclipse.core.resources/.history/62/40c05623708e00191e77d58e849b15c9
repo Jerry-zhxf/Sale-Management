@@ -1,0 +1,296 @@
+package org.zhxf.sale.web;
+
+import java.util.Iterator;
+//销售信息
+import java.util.List;
+
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.zhxf.sale.domain.ItemInfo;
+import org.zhxf.sale.domain.Sale;
+import org.zhxf.sale.domain.StaffInfo;
+import org.zhxf.sale.domain.StoreInfo;
+import org.zhxf.sale.domain.Vip;
+import org.apache.struts2.ServletActionContext;
+import org.zhxf.sale.domain.Delivery;
+import org.zhxf.sale.domain.OrderDetail;
+import org.zhxf.sale.domain.OrderDetailId;
+import org.zhxf.sale.service.DeliveryService;
+import org.zhxf.sale.service.OrderDetailService;
+import org.zhxf.sale.service.ItemInfoService;
+import org.zhxf.sale.service.SaleService;
+import org.zhxf.sale.service.StaffInfoService;
+import org.zhxf.sale.service.StoreInfoService;
+import org.zhxf.sale.service.VipService;
+import org.zhxf.sale.utils.Page;
+
+import com.opensymphony.xwork2.ModelDriven;
+
+public class SaleAction extends BaseAction implements ModelDriven<Sale> {
+
+	private static final long serialVersionUID = -628649677616338668L;
+	private Sale model = new Sale();
+
+	@Override
+	public Sale getModel() {
+		return model;
+	}
+
+	// 分页查询
+	private Page<Sale> page = new Page<Sale>();
+	public Page<Sale> getPage() {
+		return page;
+	}
+	public void setPage(Page<Sale> page) {
+		this.page = page;
+	}
+
+	private SaleService saleService;
+	public void setSaleService(SaleService saleService) {
+		this.saleService = saleService;
+	}
+	private ItemInfoService itemInfoService;
+	public void setItemInfoService(ItemInfoService itemInfoService) {
+		this.itemInfoService = itemInfoService;
+	}
+	private StoreInfoService storeInfoService;
+	public void setStoreInfoService(StoreInfoService storeInfoService) {
+		this.storeInfoService = storeInfoService;
+	}
+	private VipService vipService;
+	public void setVipService(VipService vipService) {
+		this.vipService = vipService;
+	}
+	private StaffInfoService staffInfoService;
+	public void setStaffInfoService(StaffInfoService staffInfoService) {
+		this.staffInfoService = staffInfoService;
+	}
+	private DeliveryService deliveryService;
+	public void setDeliveryService(DeliveryService deliveryService) {
+		this.deliveryService = deliveryService;
+	}
+	private OrderDetailService orderDetailService;
+	public void setOrderDetailService(OrderDetailService orderDetailService) {
+		this.orderDetailService = orderDetailService;
+	}
+
+	/**
+	 * 分页查询
+	 */
+	public String list() throws Exception {
+		String hql = "from Sale";
+
+		saleService.findPage(hql, page, Sale.class, null);  //User是实体
+
+		// 设置分页的url地址
+		page.setUrl("saleAction_list");
+
+		// 将page对象压入栈顶
+		super.push(page);
+		return "list";
+	}
+	/**
+	 * 分页查看详情
+	 */
+	public String detail() throws Exception {
+		String hql = "from Sale";
+
+		saleService.findPage(hql, page, Sale.class, null);  //User是实体
+
+		// 设置分页的url地址
+		page.setUrl("saleAction_detail");
+
+		// 将page对象压入栈顶
+		super.push(page);
+		return "detail";
+	}
+	/**
+	 * 分页查看快递单号
+	 */
+	public String delivery() throws Exception {
+		String hql = "from Sale";
+
+		saleService.findPage(hql, page, Sale.class, null);  //User是实体
+
+		// 设置分页的url地址
+		page.setUrl("saleAction_delivery");
+
+		// 将page对象压入栈顶
+		super.push(page);
+		return "delivery";
+	}
+
+	/**
+	 * 查看
+	 */
+	public String toview() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		Sale sale = saleService.get(Sale.class, model.getOrderNo());
+
+		// 放入栈顶
+		super.push(sale);
+
+		// 3.跳页面
+		return "toview";
+	}
+
+	/**
+	 * 进入新增页面
+	 */
+	public String tocreate() throws Exception {
+		List<ItemInfo> itemInfo = itemInfoService.find("from ItemInfo", ItemInfo.class, null);
+		
+		super.put("itemInfo", itemInfo);
+		
+		List<StaffInfo> staffInfo = staffInfoService.find("from StaffInfo", StaffInfo.class, null);
+		
+		super.put("staffInfo", staffInfo);
+		
+		List<StoreInfo> storeInfo = storeInfoService.find("from StoreInfo", StoreInfo.class, null);		
+		
+		super.put("storeInfo", storeInfo);
+		
+		List<Vip> vip = vipService.find("from Vip", Vip.class, null);		
+		
+		super.put("vip", vip);
+		
+		return "tocreate";
+	}
+
+	/**
+	 * 保存
+	 */
+	public String insert() throws Exception {
+		
+		Sale sale = saleService.get(Sale.class, model.getOrderNo());
+		if(sale!=null) {
+			Float num2 = 0F;
+			if(sale.getPayAmount()!=0L) {
+				num2 = sale.getPayAmount();
+			}
+			sale.setPayAmount(model.getPayAmount()+num2);
+			Float num3 = 0F;
+			if(sale.getTotalAmount()!=0L) {
+				num3 = sale.getTotalAmount();
+			}
+			sale.setTotalAmount(model.getTotalAmount()+num3);
+			sale.setSaleDate(model.getSaleDate());
+			saleService.saveOrUpdate(sale);
+			
+		}else {
+			saleService.saveOrUpdate(model);
+		}
+		HttpServletRequest httpReq = ServletActionContext.getRequest();
+		String s = httpReq.getParameter("itemNo");
+		HttpServletRequest httpReq1 = ServletActionContext.getRequest();
+		String q = httpReq1.getParameter("itemQty");
+		Long itemQty = Long.valueOf(q);
+		HttpServletRequest httpReq2 = ServletActionContext.getRequest();
+		String i = httpReq2.getParameter("itemPrice");
+		Float itemPrice = Float.parseFloat(i);
+		HttpServletRequest httpReq3 = ServletActionContext.getRequest();
+		String d = httpReq3.getParameter("deliveryNo");
+		
+		System.out.println("spbh: " +s+" a " + itemQty + " b "+ itemPrice + " c "+ d);
+		System.out.println(model.getStaffInfo().getStaffNo());
+		System.out.println(model.getStoreInfo().getStoreNo());
+		System.out.println(model.getVip().getVipNo());
+		System.out.println(model.getOrderNo());
+		
+		OrderDetailId orderDetailId = new OrderDetailId();
+		orderDetailId.setItemNo(s);
+		orderDetailId.setOrderNo(model.getOrderNo());
+		
+		
+		if(orderDetailService.get(OrderDetail.class, orderDetailId)==null) {
+			OrderDetail model4 = new OrderDetail();
+			ItemInfo itemInfo = itemInfoService.get(ItemInfo.class, s);
+			model4.setId(orderDetailId);
+			model4.setItemInfo(itemInfo);
+			model4.setSale(model);
+			model4.setItemPrice(0f);
+			model4.setItemQty(0L);
+			orderDetailService.saveOrUpdate(model4);
+		}
+		OrderDetail orderDetail = orderDetailService.get(OrderDetail.class, orderDetailId);
+		orderDetail.setItemPrice(itemPrice);
+		Long num = 0L;
+		if(orderDetail.getItemQty()!=0L) {
+			num = orderDetail.getItemQty();
+		}
+		orderDetail.setItemQty(itemQty + num);
+		orderDetailService.saveOrUpdate(orderDetail);
+		
+		if(deliveryService.get(Delivery.class, s)==null) {
+			Delivery model5 = new Delivery();
+			model5.setSale(model);
+			model5.setDeliveryNo(null);
+			deliveryService.saveOrUpdate(model5);
+		}
+		System.out.println(deliveryService.get(Delivery.class, s));
+		Delivery delivery = deliveryService.get(Delivery.class, s);
+		
+		System.out.println(d);
+		delivery.setDeliveryNo(d);
+		
+		deliveryService.saveOrUpdate(delivery);
+		
+		
+		
+		return "alist";
+		
+	}
+
+	/**
+	 * 进入修改页面
+	 */
+	public String toupdate() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		Sale sale = saleService.get(Sale.class, model.getOrderNo());
+		super.push(sale);
+		
+		//List<Role> roles = roleService.find("from Role", Role.class, null);
+		//super.put("roles", roles);
+				
+		return "toupdate";
+	}
+
+	/**
+	 * 修改
+	 */
+//	public String update() throws Exception {
+//		
+//		// 1.调用业务方法，根据id,得到对象
+//		Sale sale = saleService.get(Sale.class, model.getOrderNo());
+//		
+//		sale.setStaffInfo(model.getStaffInfo());
+//		sale.setStoreInfo(model.getStoreInfo());
+//		sale.setVip(model.getVip());
+//		sale.setSaleDate(model.getSaleDate());
+//		sale.setTotalAmount(model.getTotalAmount());
+//		sale.setPayAmount(model.getPayAmount());
+//		sale.setDiscount(model.getDiscount());
+//		sale.setPayment(model.getPayment());
+//		sale.setIsDelivery(model.getIsDelivery());
+//		sale.setOrderDetails(model.getOrderDetails());
+//		sale.setDeliveries(model.getDeliveries());
+//		
+//		saleService.saveOrUpdate(sale);
+//				
+//		return "alist";
+//	}
+
+	/**
+	 * 删除
+	 */
+	public String delete() throws Exception {
+		String ids[] = model.getOrderNo().split(", ");
+		
+		//调用业务方法，实现批量删除
+		saleService.delete(Sale.class, ids);
+		
+		return "alist";
+	}
+}

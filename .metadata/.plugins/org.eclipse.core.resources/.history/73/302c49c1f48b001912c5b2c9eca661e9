@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-6-10 20:34:33 by Hibernate Tools 5.2.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="saletest" dynamic-insert="false" dynamic-update="false" mutable="true" name="org.lqz.sale.domain.Cpy" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="cpy">
+        <id name="itemNo" type="string">
+            <column length="13" name="Item_no"/>
+            <generator class="foreign">
+                <param name="property">itemInfo</param>
+            </generator>
+        </id>
+        <one-to-one class="org.lqz.sale.domain.ItemInfo" constrained="true" embed-xml="true" name="itemInfo"/>
+        <property generated="never" lazy="false" name="stockQty" optimistic-lock="true" type="java.lang.Long" unique="false">
+            <column name="Stock_qty"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="sends" optimistic-lock="true" sort="unsorted" table="send">
+            <key on-delete="noaction">
+                <column length="13" name="Item_no" not-null="true"/>
+            </key>
+            <one-to-many class="org.lqz.sale.domain.Send" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

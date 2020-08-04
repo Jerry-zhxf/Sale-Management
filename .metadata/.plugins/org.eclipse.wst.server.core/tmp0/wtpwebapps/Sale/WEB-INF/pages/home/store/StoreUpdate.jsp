@@ -1,0 +1,53 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ include file="../../base.jsp"%>
+<html>
+<head>
+</head>
+<body>
+<form action="user/storeAction_update" class="form-horizontal" role="form" method="post">
+<div>
+	<ul class="nav nav-pills">
+	  <li><a href="#" onclick="formSubmit('storeAction_list','_self')"><img alt="add" src="${ctx }/img/back.png"></a></li>
+	  <li><a href="#" onclick="formSubmit('storeAction_update','_self')"><img alt="modify" src="${ctx }/img/save.png"></a></li>
+	</ul>
+</div>
+
+<!-- 隐藏于：商品id -->
+<input type="hidden" name="storeNo" value="${storeNo }">
+
+<div style="margin: 10px">
+<div class="col-md-4" style="margin-top: 30px">
+
+	<div class="form-group">
+		<label for="firstname" class="col-md-2 control-label">门店名称</label>
+		<div class="col-md-10">
+			<input type="text" class="form-control" id="firstname" 
+				   name="storeName" placeholder="请输入门店名称" value="${storeName }">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="firstname" class="col-md-2 control-label">地址</label>
+		<div class="col-md-10">
+			<input type="text" class="form-control" id="firstname" 
+				   name="storeAddr" placeholder="请输入地址" value="${storeAddr }">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="firstname" class="col-md-2 control-label">负责人</label>
+		<div class="col-md-10">
+			<input type="text" class="form-control" id="firstname" 
+				   name="manager" placeholder="请输入负责人姓名" value="${manager }">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="firstname" class="col-md-2 control-label">电话</label>
+		<div class="col-md-10">
+			<input type="text" class="form-control" id="firstname" 
+				   name="tel" placeholder="请输入电话，多个可用分号隔开" value="${tel }">
+		</div>
+	</div>
+</div>
+</div>
+</form>
+</body>
+</html>

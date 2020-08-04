@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.ui.theme" value="simple"/>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<package name="sale" namespace="/sale" extends="default">
+	
+		<action name="saleAction_*" class="org.lqz.sale.web.SaleAction" method="{1}">
+		    <result name="list">/WEB-INF/pages/sale/sale/SaleList.jsp</result>
+		    <result name="toview">/WEB-INF/pages/sale/sale/SaleView.jsp</result>
+		    <result name="tocreate">/WEB-INF/pages/sale/sale/SaleCreate.jsp</result>
+		    <result name="toupdate">/WEB-INF/pages/sale/sale/SaleUpdate.jsp</result>
+		    <result name="alist" type="redirectAction">saleAction_list</result>
+		</action>
+		
+ 		<action name="statisticAction_*" class="org.lqz.sale.web.StatisticAction" method="{1}">
+		    <result name="list">/WEB-INF/pages/sale/statistic/StatisticList.jsp</result>
+		    <result name="toview">/WEB-INF/pages/sale/statistic/StatisticView.jsp</result>
+		    <result name="tocreate">/WEB-INF/pages/sale/statistic/StatisticCreate.jsp</result>
+		    <result name="toupdate">/WEB-INF/pages/sale/statistic/StatisticUpdate.jsp</result>
+		    <result name="alist" type="redirectAction">statisticAction_list</result>
+		</action>
+		
+		<action name="temporaryAction_*" class="org.lqz.sale.web.TemporaryAction" method="{1}">
+		    <result name="list">/WEB-INF/pages/sale/temporary/TemporaryList.jsp</result>
+		    <result name="toview">/WEB-INF/pages/sale/temporary/TemporaryView.jsp</result>
+		    <result name="tocreate">/WEB-INF/pages/sale/temporary/TemporaryCreate.jsp</result>
+		    <result name="toupdate">/WEB-INF/pages/sale/temporary/TemporaryUpdate.jsp</result>
+		    <result name="alist" type="redirectAction">temporaryAction_list</result>
+		</action>
+		
+	</package>
+
+	
+</struts>
+	

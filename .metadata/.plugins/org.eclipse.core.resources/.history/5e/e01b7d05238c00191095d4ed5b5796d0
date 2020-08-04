@@ -1,0 +1,6 @@
+package org.zhxf.sale.web;
+
+//等级制度
+public class VipdegreeAction {
+
+}

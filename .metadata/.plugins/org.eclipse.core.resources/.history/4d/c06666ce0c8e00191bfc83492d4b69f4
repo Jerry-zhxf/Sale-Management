@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-6-14 2:31:54 by Hibernate Tools 5.2.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="saletest" dynamic-insert="false" dynamic-update="false" mutable="true" name="org.zhxf.sale.domain.Supply" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="supply">
+        <composite-id class="org.zhxf.sale.domain.SupplyId" mapped="false" name="id" unsaved-value="undefined">
+            <key-property name="vendorNo" type="string">
+                <column length="16" name="Vendor_no"/>
+            </key-property>
+            <key-property name="itemNo" type="string">
+                <column length="13" name="Item_no"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="org.zhxf.sale.domain.ItemInfo" embed-xml="true" fetch="select" insert="false" name="itemInfo" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column length="13" name="Item_no" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="org.zhxf.sale.domain.SupplyInfo" embed-xml="true" fetch="select" insert="false" name="supplyInfo" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column length="16" name="Vendor_no" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="supplyDate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="Supply_date" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="supplyQuality" optimistic-lock="true" type="java.lang.Long" unique="false">
+            <column name="Supply_quality"/>
+        </property>
+        <property generated="never" lazy="false" name="supplyPrice" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="Supply_price" precision="8"/>
+        </property>
+    </class>
+</hibernate-mapping>

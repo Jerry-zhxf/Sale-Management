@@ -1,0 +1,19 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ include file="../../base.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="icform" class="form-horizontal"  method="post">
+<div>
+	<ul class="nav nav-pills">
+	  <li><a href="#" onclick="formSubmit('sendAction_list','_self')"><img alt="add" src="${ctx }/img/back.png"></a></li>
+	</ul>
+</div>
+<div class="col-md-5"><h5>配送货物数量超过库存量，请仔细确认！</h5></div>
+</form>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-6-13 18:24:02 by Hibernate Tools 5.2.12.Final -->
+<hibernate-mapping>
+
+<class
+    name="org.zhxf.sale.domain.Vip"
+    table="vip"
+    catalog="saletest"
+    optimistic-lock="version"
+>
+
+	<id 
+        name="vipNo"
+        type="string"
+    >
+    
+<column name="VIP_no" length="12" />
+	    <generator class="assigned" />
+    </id>
+
+
+
+
+    <property
+        name="currentPoint"
+	    type="java.lang.Long"
+    >
+<column name="Current_point" />
+  </property>
+
+    <property
+        name="totalPoint"
+	    type="java.lang.Long"
+    >
+<column name="Total_point" />
+  </property>
+
+
+	<set name="presales"
+table="presale"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="VIP_no" length="12" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.Presale"
+/>
+	</set>
+
+	<set name="sales"
+table="sale"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="VIP_no" length="12" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.Sale"
+/>
+	</set>
+
+
+</class>
+
+</hibernate-mapping>

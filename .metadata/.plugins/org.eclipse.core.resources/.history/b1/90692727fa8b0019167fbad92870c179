@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-6-11 11:02:35 by Hibernate Tools 5.2.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="saletest" dynamic-insert="false" dynamic-update="false" mutable="true" name="org.lqz.sale.domain.OrderDetail" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="order_detail">
+        <composite-id class="org.lqz.sale.domain.OrderDetailId" mapped="false" name="id" unsaved-value="undefined">
+            <key-property name="orderNo" type="string">
+                <column length="25" name="Order_no"/>
+            </key-property>
+            <key-property name="itemNo" type="string">
+                <column length="13" name="Item_no"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="org.lqz.sale.domain.ItemInfo" embed-xml="true" fetch="select" insert="false" name="itemInfo" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column length="13" name="Item_no" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="org.lqz.sale.domain.Sale" embed-xml="true" fetch="select" insert="false" name="sale" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column length="25" name="Order_no" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="itemQty" optimistic-lock="true" type="java.lang.Long" unique="false">
+            <column name="Item_qty"/>
+        </property>
+        <property generated="never" lazy="false" name="itemPrice" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="Item_price" precision="8"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="cpy" match-catalog="saletest"></table-filter>
+	<table-filter match-name="degree" match-catalog="saletest"></table-filter>
+	<table-filter match-name="delivery" match-catalog="saletest"></table-filter>
+	<table-filter match-name="item_info" match-catalog="saletest"></table-filter>
+	<table-filter match-name="local_temporary_record"
+		match-catalog="saletest">
+	</table-filter>
+	<table-filter match-name="order_detail" match-catalog="saletest"></table-filter>
+	<table-filter match-name="presale" match-catalog="saletest"></table-filter>
+	<table-filter match-name="role" match-catalog="saletest"></table-filter>
+	<table-filter match-name="sale" match-catalog="saletest"></table-filter>
+	<table-filter match-name="send" match-catalog="saletest"></table-filter>
+	<table-filter match-name="staff_info" match-catalog="saletest"></table-filter>
+	<table-filter match-name="store_info" match-catalog="saletest"></table-filter>
+	<table-filter match-name="store_itemsale"
+		match-catalog="saletest">
+	</table-filter>
+	<table-filter match-name="store_stock_info"
+		match-catalog="saletest">
+	</table-filter>
+	<table-filter match-name="supply" match-catalog="saletest"></table-filter>
+	<table-filter match-name="supply_info" match-catalog="saletest"></table-filter>
+	<table-filter match-name="transfer" match-catalog="saletest"></table-filter>
+	<table-filter match-name="user" match-catalog="saletest"></table-filter>
+	<table-filter match-name="vip" match-catalog="saletest"></table-filter>
+</hibernate-reverse-engineering>

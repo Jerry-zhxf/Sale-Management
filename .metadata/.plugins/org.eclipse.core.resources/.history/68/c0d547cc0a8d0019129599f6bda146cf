@@ -1,0 +1,125 @@
+package org.zhxf.sale.web;
+
+import java.util.List;
+
+import org.zhxf.sale.domain.Degree;
+import org.zhxf.sale.service.DegreeService;
+import org.zhxf.sale.utils.Page;
+
+import com.opensymphony.xwork2.ModelDriven;
+
+public class VipdegreeAction extends BaseAction implements ModelDriven<Degree> {
+
+	private static final long serialVersionUID = -628649677616338668L;
+	private Degree model = new Degree();
+
+	@Override
+	public Degree getModel() {
+		return model;
+	}
+
+	// 分页查询
+	private Page<Degree> page = new Page<Degree>();
+	public Page<Degree> getPage() {
+		return page;
+	}
+	public void setPage(Page<Degree> page) {
+		this.page = page;
+	}
+
+	private DegreeService degreeService;
+	public void setDegreeService(DegreeService degreeService) {
+		this.degreeService = degreeService;
+	}
+
+	/**
+	 * 分页查询
+	 */
+	public String list() throws Exception {
+		String hql = "from Degree order by id.degree asc";
+
+		degreeService.findPage(hql, page, Degree.class, null); 
+
+		// 设置分页的url地址
+		page.setUrl("vipdegreeAction_list");
+
+		// 将page对象压入栈顶
+		super.push(page);
+		return "list";
+	}
+
+	/**
+	 * 查看
+	 */
+	public String toview() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		Degree Degree = degreeService.get(Degree.class, model.getDegree());
+
+		// 放入栈顶
+		super.push(Degree);
+
+		// 3.跳页面
+		return "toview";
+	}
+
+	/**
+	 * 进入新增页面
+	 */
+	public String tocreate() throws Exception {
+//		List<Role> roles = roleService.find("from Role", Role.class, null);
+//		
+//		super.put("roles", roles);
+		
+		return "tocreate";
+	}
+
+	/**
+	 * 保存
+	 */
+	public String insert() throws Exception {
+		degreeService.saveOrUpdate(model);
+		return "alist";
+	}
+
+	/**
+	 * 进入修改页面
+	 */
+	public String toupdate() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		Degree Degree = degreeService.get(Degree.class, model.getId());
+		super.push(Degree);
+		
+//		List<Role> roles = roleService.find("from Role", Role.class, null);
+//		super.put("roles", roles);
+				
+		return "toupdate";
+	}
+
+	/**
+	 * 修改
+	 */
+	public String update() throws Exception {
+		
+		// 1.调用业务方法，根据id,得到对象
+		Degree Degree = degreeService.get(Degree.class, model.getId());
+		
+		Degree.setDegree(model.getDegree());
+		Degree.setDiscount(model.getDiscount());
+		
+		degreeService.saveOrUpdate(Degree);
+				
+		return "alist";
+	}
+
+	/**
+	 * 删除
+	 */
+	
+	public String delete() throws Exception {
+		String ids[] = model.getDegree().split(", ");
+		//调用业务方法，实现批量删除
+		degreeService.delete(Degree.class, ids);
+		
+		return "alist";
+	}
+}

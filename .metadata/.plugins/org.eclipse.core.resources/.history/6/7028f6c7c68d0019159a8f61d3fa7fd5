@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-6-13 18:24:02 by Hibernate Tools 5.2.12.Final -->
+<hibernate-mapping>
+
+<class
+    name="org.zhxf.sale.domain.Supply"
+    table="supply"
+    catalog="saletest"
+    optimistic-lock="version"
+>
+
+    <composite-id
+		name="id"
+        class="org.zhxf.sale.domain.SupplyId"
+    >		
+	        <key-property name="vendorNo" type="string">
+<column name="Vendor_no" length="16" />
+	        </key-property>
+	        <key-property name="itemNo" type="string">
+<column name="Item_no" length="13" />
+	        </key-property>
+    </composite-id>	
+
+
+
+
+    <many-to-one
+	    name="itemInfo"
+	    class="org.zhxf.sale.domain.ItemInfo"
+	    
+        update="false"
+        insert="false"
+        fetch="select"
+    >
+<column name="Item_no" length="13" not-null="true" />
+   </many-to-one>
+    <many-to-one
+	    name="supplyInfo"
+	    class="org.zhxf.sale.domain.SupplyInfo"
+	    
+        update="false"
+        insert="false"
+        fetch="select"
+    >
+<column name="Vendor_no" length="16" not-null="true" />
+   </many-to-one>
+    <property
+        name="supplyDate"
+	    type="timestamp"
+    >
+<column name="Supply_date" length="19" not-null="true" />
+  </property>
+
+    <property
+        name="supplyQuality"
+	    type="java.lang.Long"
+    >
+<column name="Supply_quality" />
+  </property>
+
+    <property
+        name="supplyPrice"
+	    type="java.lang.Float"
+    >
+<column name="Supply_price" precision="8" />
+  </property>
+
+
+
+</class>
+
+</hibernate-mapping>

@@ -1,0 +1,6 @@
+package org.zhxf.sale.web;
+
+//预售信息
+public class PresaleAction {
+
+}

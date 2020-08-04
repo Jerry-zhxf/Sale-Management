@@ -1,0 +1,57 @@
+package org.zhxf.sale.service.impl;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+
+import org.lqz.sale.domain.DegreeId;
+import org.lqz.sale.service.DegreeService;
+import org.zhxf.sale.dao.BaseDao;
+import org.zhxf.sale.utils.Page;
+
+public class DegreeServiceImpl implements DegreeService {
+
+	private BaseDao baseDao;
+
+	public void setBaseDao(BaseDao baseDao) {
+		this.baseDao = baseDao;
+	}
+
+	@Override
+	public List<DegreeId> find(String hql, Class<DegreeId> entityClass, Object[] params) {
+		return baseDao.find(hql, entityClass, params);
+	}
+
+	@Override
+	public DegreeId get(Class<DegreeId> entityClass, Serializable id) {
+		return baseDao.get(entityClass, id);
+	}
+
+	@Override
+	public Page<DegreeId> findPage(String hql, Page<DegreeId> page, Class<DegreeId> entityClass, Object[] params) {
+		return baseDao.findPage(hql, page, entityClass, params);
+	}
+
+	@Override
+	public void saveOrUpdate(DegreeId entity) {
+		baseDao.saveOrUpdate(entity);
+	}
+
+	@Override
+	public void saveOrUpdateAll(Collection<DegreeId> entitys) {
+		baseDao.saveOrUpdateAll(entitys);
+	}
+
+	@Override
+	public void deleteById(Class<DegreeId> entityClass, Serializable id) {
+		baseDao.deleteById(entityClass, id);// 删除一个对象
+	}
+
+	@Override
+	public void delete(Class<DegreeId> entityClass, Serializable[] ids) {
+		for (Serializable id : ids) {
+			this.deleteById(DegreeId.class, id);
+		}
+	}
+
+}

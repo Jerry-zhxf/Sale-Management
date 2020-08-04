@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-6-13 18:24:02 by Hibernate Tools 5.2.12.Final -->
+<hibernate-mapping>
+
+<class
+    name="org.zhxf.sale.domain.Cpy"
+    table="cpy"
+    catalog="saletest"
+    optimistic-lock="version"
+>
+
+	<id 
+        name="itemNo"
+        type="string"
+    >
+    
+<column name="Item_no" length="13" />
+	    <generator class="foreign">
+            <param name="property">itemInfo</param>
+		</generator>
+    </id>
+
+
+
+
+    <one-to-one
+	    name="itemInfo"
+	    class="org.zhxf.sale.domain.ItemInfo"
+        constrained="true"
+
+    >
+   </one-to-one>
+    <property
+        name="stockQty"
+	    type="java.lang.Long"
+    >
+<column name="Stock_qty" />
+  </property>
+
+
+
+</class>
+
+</hibernate-mapping>

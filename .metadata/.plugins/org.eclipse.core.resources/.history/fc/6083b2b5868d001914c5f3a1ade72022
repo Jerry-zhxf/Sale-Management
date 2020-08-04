@@ -1,0 +1,98 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ include file="../../base.jsp"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<html>
+<head>
+	<script language="javascript" src="${ctx}/js/calendar.js"></script>
+	<script language="javascript" src="${ctx}/js/WdatePicker.js"></script>
+</head>
+<body>
+<form action="icform" class="form-horizontal"  method="post">
+<div>
+	<ul class="nav nav-pills">
+	  <li><a href="#" onclick="formSubmit('saleAction_list','_self')"><img alt="add" src="${ctx }/img/back.png"></a></li>
+	  <li><a href="#" onclick="formSubmit('saleAction_insert','_self')"><img alt="modify" src="${ctx }/img/save.png"></a></li>
+	</ul>
+</div>
+
+<div style="margin: 10px">
+<div class="col-md-6">
+	<div class="form-group">
+    <label class="col-md-2 control-label">订单编号</label>
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="orderNo" placeholder="请输入订单单号，示例：1CHN300000001190522172815">
+    </div>
+  </div>
+  <div class="form-group">
+		<label class="col-md-2 control-label">门店编号</label>
+		<div class="col-md-10">
+			<s:select cssClass="form-control" name="storeInfo.storeNo" list="#storeInfo" headerKey="" headerValue="--请选择--" listKey="storeNo" listValue="storeName"></s:select>
+		</div>
+  </div>
+  <div class="form-group">
+		<label class="col-md-2 control-label">会员号</label>
+		<div class="col-md-10">
+			<s:select cssClass="form-control" name="vip.vipNo" list="#vip" headerKey="" headerValue="--请选择--" listKey="vipNo" listValue="vipNo"></s:select>
+		</div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label">销售日期</label>
+    <div class="col-md-10">
+      <input type="text" name="saleDate"  class="form-control" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="请选择销售时间">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label">总金额</label>
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="totalAmount" placeholder="请输入总数额">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label">实付金额</label>
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="payAmount" placeholder="请输入实付数额">
+    </div>
+  </div>
+  <div class="form-group">
+		<label class="col-md-2 control-label">折扣</label>
+		<div class="col-md-10">
+			<input type="text" class="form-control" name="discount" placeholder="请输入折扣">
+		</div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label">支付方式</label>
+    <div class="col-md-10">
+      <s:select cssClass="form-control" name="payment" list="#{'1':'现金','2':'支付宝','3':'微信','4':'银联卡','5':'visa'}" headerKey="" headerValue="--请选择--"></s:select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label">是否快递</label>
+    <div class="col-md-10">
+      <s:select type="text" class="form-control" name="isDelivery" list="#{'1':'是','2':'否'}" placeholder="请选择是否快递"></s:select>
+    </div>
+  </div>
+  <div id="sDiv">
+	<input type="text" name="t" id="t" value="" /><br/>
+	<input type="button" name="" id="" value="1" onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="2" onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="3" onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="4" onclick="calCulate(this.value)"/><br />
+	<input type="button" name="" id="" value="5" onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="6" onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="7" onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="8" onclick="calCulate(this.value)"/><br />
+	<input type="button" name="" id="" value="9" onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="0" onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="." onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="C" onclick="calCulate(this.value)"/><br/>
+	<input type="button" name="" id="" value="+" onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="-" onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="*" onclick="calCulate(this.value)"/>
+	<input type="button" name="" id="" value="/" onclick="calCulate(this.value)"/><br/>
+	<input type="button" name="" id="equ" value="=" onclick="calCulate(this.value)"/>
+  </div>
+</div>
+</div>
+</form>
+</body>
+</html>

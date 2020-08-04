@@ -1,0 +1,57 @@
+package org.zhxf.sale.service.impl;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+
+import org.zhxf.sale.dao.BaseDao;
+import org.zhxf.sale.domain.Transfer;
+import org.zhxf.sale.service.TransferService;
+import org.zhxf.sale.utils.Page;
+
+public class TransferServiceImpl implements TransferService {
+
+	private BaseDao baseDao;
+
+	public void setBaseDao(BaseDao baseDao) {
+		this.baseDao = baseDao;
+	}
+
+	@Override
+	public List<TransferId> find(String hql, Class<TransferId> entityClass, Object[] params) {
+		return baseDao.find(hql, entityClass, params);
+	}
+
+	@Override
+	public TransferId get(Class<TransferId> entityClass, Serializable id) {
+		return baseDao.get(entityClass, id);
+	}
+
+	@Override
+	public Page<TransferId> findPage(String hql, Page<TransferId> page, Class<TransferId> entityClass, Object[] params) {
+		return baseDao.findPage(hql, page, entityClass, params);
+	}
+
+	@Override
+	public void saveOrUpdate(TransferId entity) {
+		baseDao.saveOrUpdate(entity);
+	}
+
+	@Override
+	public void saveOrUpdateAll(Collection<TransferId> entitys) {
+		baseDao.saveOrUpdateAll(entitys);
+	}
+
+	@Override
+	public void deleteById(Class<TransferId> entityClass, Serializable id) {
+		baseDao.deleteById(entityClass, id);// 删除一个对象
+	}
+
+	@Override
+	public void delete(Class<TransferId> entityClass, Serializable[] ids) {
+		for (Serializable id : ids) {
+			this.deleteById(TransferId.class, id);
+		}
+	}
+
+}

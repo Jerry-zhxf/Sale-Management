@@ -1,0 +1,57 @@
+package org.lqz.sale.service.impl;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+
+import org.lqz.sale.domain.SendId;
+import org.lqz.sale.service.SendService;
+import org.zhxf.sale.dao.BaseDao;
+import org.zhxf.sale.utils.Page;
+
+public class SendServiceImpl implements SendService {
+
+	private BaseDao baseDao;
+
+	public void setBaseDao(BaseDao baseDao) {
+		this.baseDao = baseDao;
+	}
+
+	@Override
+	public List<SendId> find(String hql, Class<SendId> entityClass, Object[] params) {
+		return baseDao.find(hql, entityClass, params);
+	}
+
+	@Override
+	public SendId get(Class<SendId> entityClass, Serializable id) {
+		return baseDao.get(entityClass, id);
+	}
+
+	@Override
+	public Page<SendId> findPage(String hql, Page<SendId> page, Class<SendId> entityClass, Object[] params) {
+		return baseDao.findPage(hql, page, entityClass, params);
+	}
+
+	@Override
+	public void saveOrUpdate(SendId entity) {
+		baseDao.saveOrUpdate(entity);
+	}
+
+	@Override
+	public void saveOrUpdateAll(Collection<SendId> entitys) {
+		baseDao.saveOrUpdateAll(entitys);
+	}
+
+	@Override
+	public void deleteById(Class<SendId> entityClass, Serializable id) {
+		baseDao.deleteById(entityClass, id);// 删除一个对象
+	}
+
+	@Override
+	public void delete(Class<SendId> entityClass, Serializable[] ids) {
+		for (Serializable id : ids) {
+			this.deleteById(SendId.class, id);
+		}
+	}
+
+}

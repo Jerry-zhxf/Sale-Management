@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="saleAction" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="presaleAction"/>
+			<item value="storeStockInfo"/>
+			<item value="vipdataAction"/>
+			<item value="vipdegreeAction"/>
+			<item value="stockOutAction"/>
+			<item value="suppleAction"/>
+			<item value="staffAction"/>
+			<item value="model2"/>
+			<item value="DegreeId"/>
+			<item value="TransferId"/>
+			<item value="SupplyId"/>
+			<item value="Supply"/>
+			<item value="StoreItemsaleId"/>
+			<item value="StoreStockInfoId"/>
+			<item value="SendId"/>
+		</list>
+		<list key="replacehistory">
+			<item value="saleAction"/>
+			<item value="vipdataAction"/>
+			<item value="vipdegreeAction"/>
+			<item value="presaleAction"/>
+			<item value="model"/>
+			<item value="Degree"/>
+			<item value="Transfer"/>
+			<item value="Supply"/>
+			<item value="StoreItemsale"/>
+			<item value="StoreStockInfo"/>
+			<item value="Send"/>
+			<item value="OrderDetail"/>
+			<item value="Delivery"/>
+			<item value="transferAction"/>
+			<item value="suppleAction"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="260" key="DIALOG_WIDTH"/>
+		<item value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-21|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI" key="DIALOG_FONT_NAME"/>
+		<item value="342" key="DIALOG_HEIGHT"/>
+		<item value="1032" key="DIALOG_X_ORIGIN"/>
+		<item value="233" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-6-12 21:25:00 by Hibernate Tools 5.2.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="saletest" dynamic-insert="false" dynamic-update="false" mutable="true" name="org.zhxf.sale.domain.Sale" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="sale">
+        <id name="orderNo" type="string">
+            <column length="25" name="Order_no"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="org.zhxf.sale.domain.StaffInfo" embed-xml="true" fetch="select" insert="true" name="staffInfo" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column length="10" name="Staff_no" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="org.zhxf.sale.domain.StoreInfo" embed-xml="true" fetch="select" insert="true" name="storeInfo" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column length="13" name="Store_no" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="org.zhxf.sale.domain.Vip" embed-xml="true" fetch="select" insert="true" name="vip" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column length="12" name="VIP_no" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="saleDate" optimistic-lock="true" type="timestamp" unique="false">
+            <column length="19" name="Sale_date"/>
+        </property>
+        <property generated="never" lazy="false" name="totalAmount" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="Total_amount" precision="8"/>
+        </property>
+        <property generated="never" lazy="false" name="payAmount" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="Pay_amount" precision="8"/>
+        </property>
+        <property generated="never" lazy="false" name="discount" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="Discount" precision="12" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="payment" optimistic-lock="true" type="string" unique="false">
+            <column length="4" name="Payment"/>
+        </property>
+        <property generated="never" lazy="false" name="isDelivery" optimistic-lock="true" type="java.lang.Boolean" unique="false">
+            <column name="isDelivery"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="orderDetails" optimistic-lock="true" sort="unsorted" table="order_detail">
+            <key on-delete="noaction">
+                <column length="25" name="Order_no"/>
+            </key>
+            <one-to-many class="org.zhxf.sale.domain.OrderDetail" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="deliveries" optimistic-lock="true" sort="unsorted" table="delivery">
+            <key on-delete="noaction">
+                <column length="25" name="Order_no"/>
+            </key>
+            <one-to-many class="org.zhxf.sale.domain.Delivery" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

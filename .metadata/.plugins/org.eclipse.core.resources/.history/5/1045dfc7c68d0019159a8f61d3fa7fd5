@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-6-13 18:24:02 by Hibernate Tools 5.2.12.Final -->
+<hibernate-mapping>
+
+<class
+    name="org.zhxf.sale.domain.OrderDetail"
+    table="order_detail"
+    catalog="saletest"
+    optimistic-lock="version"
+>
+
+    <composite-id
+		name="id"
+        class="org.zhxf.sale.domain.OrderDetailId"
+    >		
+	        <key-property name="orderNo" type="string">
+<column name="Order_no" length="25" />
+	        </key-property>
+	        <key-property name="itemNo" type="string">
+<column name="Item_no" length="13" />
+	        </key-property>
+    </composite-id>	
+
+
+
+
+    <many-to-one
+	    name="itemInfo"
+	    class="org.zhxf.sale.domain.ItemInfo"
+	    
+        update="false"
+        insert="false"
+        fetch="select"
+    >
+<column name="Item_no" length="13" not-null="true" />
+   </many-to-one>
+    <many-to-one
+	    name="sale"
+	    class="org.zhxf.sale.domain.Sale"
+	    
+        update="false"
+        insert="false"
+        fetch="select"
+    >
+<column name="Order_no" length="25" not-null="true" />
+   </many-to-one>
+    <property
+        name="itemQty"
+	    type="java.lang.Long"
+    >
+<column name="Item_qty" />
+  </property>
+
+    <property
+        name="itemPrice"
+	    type="java.lang.Float"
+    >
+<column name="Item_price" precision="8" />
+  </property>
+
+
+
+</class>
+
+</hibernate-mapping>

@@ -1,0 +1,38 @@
+<!--得到数据并且显示-->
+<%@ page contentType="text/html; charset=utf-8"%>
+<html>
+<head>
+ 
+</head>
+<body>
+<%
+	//接收第一个数(通过request接收，request类似Servlet中的HttpRequestServlet)
+	String s_num1=request.getParameter("num1");
+	//接收第二个数
+	String s_num2=request.getParameter("num2");
+	//接收运算符号
+	String flag=request.getParameter("flag");
+	int num1=0;
+	int num2=0;
+	int result=0;
+	//java中 String ->int
+	num1=Integer.parseInt(s_num1);
+	num2=Integer.parseInt(s_num2);
+ 
+ 
+	//计算
+	if(flag.equals("+"))
+	{
+		result=num1+num2;
+	}else if(flag.equals("-")){
+		result=num1-num2;
+	}else if(flag.equals("*")){
+		result=num1*num2;
+	}else{
+		result=num1/num2;
+	}
+	//输出结果
+	out.println("结果是："+result);
+%>
+</body>
+</html>

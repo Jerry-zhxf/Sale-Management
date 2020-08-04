@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-6-13 18:24:02 by Hibernate Tools 5.2.12.Final -->
+<hibernate-mapping>
+
+<class
+    name="org.zhxf.sale.domain.Sale"
+    table="sale"
+    catalog="saletest"
+    optimistic-lock="version"
+>
+
+	<id 
+        name="orderNo"
+        type="string"
+    >
+    
+<column name="Order_no" length="25" />
+	    <generator class="assigned" />
+    </id>
+
+
+
+
+    <many-to-one
+	    name="staffInfo"
+	    class="org.zhxf.sale.domain.StaffInfo"
+	    
+        fetch="select"
+    >
+<column name="Staff_no" length="10" not-null="true" />
+   </many-to-one>
+    <many-to-one
+	    name="storeInfo"
+	    class="org.zhxf.sale.domain.StoreInfo"
+	    
+        fetch="select"
+    >
+<column name="Store_no" length="13" not-null="true" />
+   </many-to-one>
+    <many-to-one
+	    name="vip"
+	    class="org.zhxf.sale.domain.Vip"
+	    
+        fetch="select"
+    >
+<column name="VIP_no" length="12" not-null="true" />
+   </many-to-one>
+    <property
+        name="saleDate"
+	    type="timestamp"
+    >
+<column name="Sale_date" length="19" />
+  </property>
+
+    <property
+        name="totalAmount"
+	    type="java.lang.Float"
+    >
+<column name="Total_amount" precision="8" />
+  </property>
+
+    <property
+        name="payAmount"
+	    type="java.lang.Float"
+    >
+<column name="Pay_amount" precision="8" />
+  </property>
+
+    <property
+        name="discount"
+	    type="java.lang.Float"
+    >
+<column name="Discount" precision="12" scale="0" />
+  </property>
+
+    <property
+        name="payment"
+	    type="string"
+    >
+<column name="Payment" length="4" />
+  </property>
+
+    <property
+        name="isDelivery"
+	    type="java.lang.Boolean"
+    >
+<column name="isDelivery" />
+  </property>
+
+
+	<set name="orderDetails"
+table="order_detail"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="Order_no" length="25" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.OrderDetail"
+/>
+	</set>
+
+	<set name="deliveries"
+table="delivery"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="Order_no" length="25" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.Delivery"
+/>
+	</set>
+
+
+</class>
+
+</hibernate-mapping>

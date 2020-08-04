@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-6-14 11:15:35 by Hibernate Tools 5.2.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="saletest" dynamic-insert="false" dynamic-update="false" mutable="true" name="org.zhxf.sale.domain.ItemInfo" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="item_info">
+        <id name="itemNo" type="string">
+            <column length="13" name="Item_no"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="itemName" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="Item_name"/>
+        </property>
+        <property generated="never" lazy="false" name="itemType" optimistic-lock="true" type="string" unique="false">
+            <column length="10" name="Item_type"/>
+        </property>
+        <property generated="never" lazy="false" name="unit" optimistic-lock="true" type="string" unique="false">
+            <column length="5" name="Unit"/>
+        </property>
+        <one-to-one class="org.zhxf.sale.domain.Cpy" constrained="false" embed-xml="true" name="cpy"/>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="transfers" optimistic-lock="true" sort="unsorted" table="transfer">
+            <key on-delete="noaction">
+                <column length="13" name="Item_no" not-null="true"/>
+            </key>
+            <one-to-many class="org.zhxf.sale.domain.Transfer" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="storeStockInfos" optimistic-lock="true" sort="unsorted" table="store_stock_info">
+            <key on-delete="noaction">
+                <column length="13" name="Item_no" not-null="true"/>
+            </key>
+            <one-to-many class="org.zhxf.sale.domain.StoreStockInfo" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="orderDetails" optimistic-lock="true" sort="unsorted" table="order_detail">
+            <key on-delete="noaction">
+                <column length="13" name="Item_no" not-null="true"/>
+            </key>
+            <one-to-many class="org.zhxf.sale.domain.OrderDetail" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="presales" optimistic-lock="true" sort="unsorted" table="presale">
+            <key on-delete="noaction">
+                <column length="13" name="Item_no" not-null="true"/>
+            </key>
+            <one-to-many class="org.zhxf.sale.domain.Presale" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="storeItemsales" optimistic-lock="true" sort="unsorted" table="store_itemsale">
+            <key on-delete="noaction">
+                <column length="13" name="Item_no" not-null="true"/>
+            </key>
+            <one-to-many class="org.zhxf.sale.domain.StoreItemsale" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="supplies" optimistic-lock="true" sort="unsorted" table="supply">
+            <key on-delete="noaction">
+                <column length="13" name="Item_no" not-null="true"/>
+            </key>
+            <one-to-many class="org.zhxf.sale.domain.Supply" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="sends" optimistic-lock="true" sort="unsorted" table="send">
+            <key on-delete="noaction">
+                <column length="13" name="Item_no" not-null="true"/>
+            </key>
+            <one-to-many class="org.zhxf.sale.domain.Send" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

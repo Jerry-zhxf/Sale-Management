@@ -1,0 +1,5 @@
+package org.lqz.sale.service;
+
+public interface CpyService {
+
+}

@@ -1,0 +1,57 @@
+package org.zhxf.sale.service.impl;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+
+import org.lqz.sale.domain.DeliveryId;
+import org.zhxf.sale.dao.BaseDao;
+import org.zhxf.sale.service.DeliveryService;
+import org.zhxf.sale.utils.Page;
+
+public class DeliveryServiceImpl implements DeliveryService {
+
+	private BaseDao baseDao;
+
+	public void setBaseDao(BaseDao baseDao) {
+		this.baseDao = baseDao;
+	}
+
+	@Override
+	public List<DeliveryId> find(String hql, Class<DeliveryId> entityClass, Object[] params) {
+		return baseDao.find(hql, entityClass, params);
+	}
+
+	@Override
+	public DeliveryId get(Class<DeliveryId> entityClass, Serializable id) {
+		return baseDao.get(entityClass, id);
+	}
+
+	@Override
+	public Page<DeliveryId> findPage(String hql, Page<DeliveryId> page, Class<DeliveryId> entityClass, Object[] params) {
+		return baseDao.findPage(hql, page, entityClass, params);
+	}
+
+	@Override
+	public void saveOrUpdate(DeliveryId entity) {
+		baseDao.saveOrUpdate(entity);
+	}
+
+	@Override
+	public void saveOrUpdateAll(Collection<DeliveryId> entitys) {
+		baseDao.saveOrUpdateAll(entitys);
+	}
+
+	@Override
+	public void deleteById(Class<DeliveryId> entityClass, Serializable id) {
+		baseDao.deleteById(entityClass, id);// 删除一个对象
+	}
+
+	@Override
+	public void delete(Class<DeliveryId> entityClass, Serializable[] ids) {
+		for (Serializable id : ids) {
+			this.deleteById(DeliveryId.class, id);
+		}
+	}
+
+}

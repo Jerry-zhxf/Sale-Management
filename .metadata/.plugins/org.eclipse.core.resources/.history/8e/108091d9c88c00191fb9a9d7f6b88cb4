@@ -1,0 +1,45 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ include file="../../base.jsp"%>
+<html>
+<head>
+</head>
+<body>
+<form action="icform" class="form-horizontal"  method="post">
+<div>
+	<ul class="nav nav-pills">
+	  <li><a href="#" onclick="formSubmit('sendAction_list','_self')"><img alt="add" src="${ctx }/img/back.png"></a></li>
+	  <li><a href="#" onclick="formSubmit('sendAction_insert','_self')"><img alt="modify" src="${ctx }/img/save.png"></a></li>
+	</ul>
+</div>
+
+<div style="margin: 10px">
+<div class="col-md-6">
+  <div class="form-group">
+		<label class="col-md-2 control-label">配送门店名称</label>
+		<div class="col-md-10">
+			<s:select cssClass="form-control" name="supplyInfo.vendorNo" list="#supplyInfo" headerKey="" headerValue="--请选择--" listKey="vendorNo" listValue="vendorName"></s:select>
+		</div>
+  </div>
+  <div class="form-group">
+		<label class="col-md-2 control-label">配送商品名称</label>
+		<div class="col-md-10">
+			<s:select cssClass="form-control" name="itemInfo.itemNo" list="#itemInfo" headerKey="" headerValue="--请选择--" listKey="itemNo" listValue="itemName"></s:select>
+		</div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label">配送日期</label>
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="id.sendDate" placeholder="请输入调货时间，示例：2019-05-22 19:10:00">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label">配送数量</label>
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="sendQty" placeholder="请输入调货数量">
+    </div>
+  </div>
+</div>
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,128 @@
+package org.zhxf.sale.web;
+
+
+import java.util.List;
+
+import org.zhxf.sale.domain.Presale;
+import org.zhxf.sale.service.PresaleService;
+import org.zhxf.sale.utils.Page;
+
+import com.opensymphony.xwork2.ModelDriven;
+
+public class PresaleAction extends BaseAction implements ModelDriven<Presale> {
+
+	private static final long serialVersionUID = -628649677616338668L;
+	private Presale model = new Presale();
+
+	@Override
+	public Presale getModel() {
+		return model;
+	}
+
+	// 分页查询
+	private Page<Presale> page = new Page<Presale>();
+	public Page<Presale> getPage() {
+		return page;
+	}
+	public void setPage(Page<Presale> page) {
+		this.page = page;
+	}
+
+	private PresaleService presaleService;
+	public void setUserService(PresaleService presaleService) {
+		this.presaleService = presaleService;
+	}
+
+
+	/**
+	 * 分页查询
+	 */
+	public String list() throws Exception {
+		String hql = "from Presale";
+
+		presaleService.findPage(hql, page, Presale.class, null);
+
+		// 设置分页的url地址
+		page.setUrl("presaleAction_list");
+
+		// 将page对象压入栈顶
+		super.push(page);
+		return "list";
+	}
+
+	/**
+	 * 查看
+	 */
+	public String toview() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		Presale presale = presaleService.get(Presale.class, model.getPresale());
+
+		// 放入栈顶
+		super.push(presale);
+
+		// 3.跳页面
+		return "toview";
+	}
+
+	/**
+	 * 进入新增页面
+	 */
+//	public String tocreate() throws Exception {
+//		List<Role> roles = roleService.find("from Role", Role.class, null);
+//		
+//		super.put("roles", roles);
+//		
+//		return "tocreate";
+//	}
+
+	/**
+	 * 保存
+	 */
+	public String insert() throws Exception {
+		userService.saveOrUpdate(model);
+		return "alist";
+	}
+
+	/**
+	 * 进入修改页面
+	 */
+	public String toupdate() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		User user = userService.get(User.class, model.getId());
+		super.push(user);
+		
+		List<Role> roles = roleService.find("from Role", Role.class, null);
+		super.put("roles", roles);
+				
+		return "toupdate";
+	}
+
+	/**
+	 * 修改
+	 */
+	public String update() throws Exception {
+		
+		// 1.调用业务方法，根据id,得到对象
+		User user = userService.get(User.class, model.getId());
+		
+		user.setName(model.getName());
+		user.setPassword(model.getPassword());
+		user.setRole(model.getRole());
+		
+		userService.saveOrUpdate(user);
+				
+		return "alist";
+	}
+
+	/**
+	 * 删除
+	 */
+	public String delete() throws Exception {
+		String ids[] = model.getId().split(", ");
+		
+		//调用业务方法，实现批量删除
+		userService.delete(User.class, ids);
+		
+		return "alist";
+	}
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-6-10 20:34:33 by Hibernate Tools 5.2.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="saletest" dynamic-insert="false" dynamic-update="false" mutable="true" name="org.lqz.sale.domain.Send" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="send">
+        <composite-id class="org.lqz.sale.domain.SendId" mapped="false" name="id" unsaved-value="undefined">
+            <key-property name="storeNo" type="string">
+                <column length="13" name="Store_no"/>
+            </key-property>
+            <key-property name="itemNo" type="string">
+                <column length="13" name="Item_no"/>
+            </key-property>
+            <key-property name="sendDate" type="timestamp">
+                <column length="19" name="Send_date"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="org.lqz.sale.domain.Cpy" embed-xml="true" fetch="select" insert="false" name="cpy" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column length="13" name="Item_no" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="org.lqz.sale.domain.StoreInfo" embed-xml="true" fetch="select" insert="false" name="storeInfo" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column length="13" name="Store_no" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="sendQty" optimistic-lock="true" type="java.lang.Long" unique="false">
+            <column name="Send_qty"/>
+        </property>
+    </class>
+</hibernate-mapping>

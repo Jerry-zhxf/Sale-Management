@@ -1,0 +1,173 @@
+package org.zhxf.sale.web;
+
+
+import java.util.List;
+
+import org.zhxf.sale.domain.Supply;
+import org.zhxf.sale.domain.ItemInfo;
+import org.zhxf.sale.domain.Cpy;
+import org.zhxf.sale.domain.SupplyInfo;
+import org.zhxf.sale.service.ItemInfoService;
+import org.zhxf.sale.service.CpyService;
+import org.zhxf.sale.service.SupplyInfoService;
+import org.zhxf.sale.service.SupplyService;
+import org.zhxf.sale.utils.Page;
+
+import com.opensymphony.xwork2.ModelDriven;
+
+public class SuppleAction extends BaseAction implements ModelDriven<Supply> {
+
+	private static final long serialVersionUID = -628649677616338668L;
+	private Supply model = new Supply();
+	private Cpy model1 = new Cpy();
+
+	@Override
+	public Supply getModel() {
+		return model;
+	}
+
+	// 分页查询
+	private Page<Supply> page = new Page<Supply>();
+	public Page<Supply> getPage() {
+		return page;
+	}
+	public void setPage(Page<Supply> page) {
+		this.page = page;
+	}
+
+	private SupplyService supplyService;
+	public void setSupplyService(SupplyService supplyService) {
+		this.supplyService = supplyService;
+	}
+	private ItemInfoService itemInfoService;
+	public void setItemInfoService(ItemInfoService itemInfoService) {
+		this.itemInfoService = itemInfoService;
+//		System.out.println(itemInfoService);
+	}
+	private SupplyInfoService supplyInfoService;
+	public void setSupplyInfoService(SupplyInfoService supplyInfoService) {
+		this.supplyInfoService = supplyInfoService;
+//		System.out.println(supplyInfoService);
+	}
+	private CpyService cpyService;
+	public void setCpyService(CpyService cpyService) {
+		this.cpyService = cpyService;
+	}
+
+	/**
+	 * 分页查询
+	 */
+	public String list() throws Exception {
+		String hql = "from Supply";
+
+		supplyService.findPage(hql, page, Supply.class, null);
+		// 设置分页的url地址
+		page.setUrl("suppleAction_list");
+
+		// 将page对象压入栈顶
+		super.push(page);
+		return "list";
+	}
+
+	/**
+	 * 查看
+	 */
+	public String toview() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		Supply Supply = supplyService.get(Supply.class, model.getId());
+		// 放入栈顶
+		super.push(Supply);
+
+		// 3.跳页面
+		return "toview";
+	}
+
+	/**
+	 * 进入新增页面
+	 */
+	public String tocreate() throws Exception {
+		List<ItemInfo> itemInfo = itemInfoService.find("from ItemInfo", ItemInfo.class, null);
+		
+		super.put("itemInfo", itemInfo);
+		
+		List<SupplyInfo> supplyInfo = supplyInfoService.find("from SupplyInfo", SupplyInfo.class, null);
+		
+		super.put("supplyInfo", supplyInfo);
+		
+		return "tocreate";
+	}
+
+	/**
+	 * 保存
+	 */
+	public String insert() throws Exception {
+		if(model.getSupplyQuality()==null) {
+			model.setSupplyQuality(0);
+		}
+		supplyService.saveOrUpdate(model);
+		
+//		Cpy cpy = cpyService.get(Cpy.class, model.getItemInfo().getItemNo());
+//		System.out.println(model.getItemInfo().getItemNo());
+//		if(cpy==null) {
+//			model1.setItemNo(model.getItemInfo().getItemNo());
+//			model1.setStockQty(null);
+//			cpyService.saveOrUpdate(model1);
+//		}
+//		cpy.setItemNo(model.getItemInfo().getItemNo());
+//		Long num = null;
+//		if(cpy.getStockQty()!=0) {
+//			num = cpy.getStockQty();
+//		}
+//		cpy.setStockQty(model.getSupplyQuality()+num);
+//		cpyService.saveOrUpdate(cpy);
+		
+		return "alist";
+	}
+
+	/**
+	 * 进入修改页面
+	 */
+	public String toupdate() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		Supply Supply = supplyService.get(Supply.class, model.getId());
+		super.push(Supply);
+		
+		//List<Role> roles = roleService.find("from Role", Role.class, null);
+		//super.put("roles", roles);
+				
+		return "toupdate";
+	}
+
+	/**
+	 * 修改
+	 */
+//	public String update() throws Exception {
+//		
+//		// 1.调用业务方法，根据id,得到对象
+//		Supply Supply = supplyService.get(Supply.class, model.getId());
+//		Supply supply = null;
+//		
+//		Supply.setVendorNo(model.getVendorNo());
+//		Supply.setItemNo(model.getItemNo());
+//		Supply.setSupplyDate(model.getSupplyDate());
+//		//待解决
+//		supply.setSupplyQuality(model.getSupplyQuality());
+//		supply.setSupplyPrice(model.getSupplyPrice());
+//		
+//		//supplyService.saveOrUpdate(Supply);
+//				
+//		return "alist";
+//	}
+
+	/**
+	 * 删除
+	 */
+//	public String delete() throws Exception {
+//		String ids[] = model.getVendorNo().split(", ");
+//		
+//		//调用业务方法，实现批量删除
+//		supplyService.delete(Supply.class, ids);
+//		
+//		return "alist";
+//	}
+}

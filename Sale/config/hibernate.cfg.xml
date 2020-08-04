@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="">
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.password">root</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/saletest</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <property name="show_sql">false</property>
+  <property name="format_sql">false</property>
+  <property name="hbm2ddl.auto">update</property><!-- none、update -->
+
+  <!-- 懒加载，配合web.xml中配置的 openSessionInViewFilter -->
+  <property name="hibernate.enable_lazy_load_no_trans">true</property>
+  <!--校验模式  JPA  java persistent api-->
+  <property name="javax.persistence.validation.mode">none</property>
+	
+  <mapping resource="org/zhxf/sale/domain/Cpy.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/Degree.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/Delivery.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/ItemInfo.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/LocalTemporaryRecord.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/OrderDetail.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/Presale.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/Role.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/Sale.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/Send.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/StaffInfo.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/StoreInfo.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/StoreItemsale.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/StoreStockInfo.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/Supply.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/SupplyInfo.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/Transfer.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/User.hbm.xml"/>
+  <mapping resource="org/zhxf/sale/domain/Vip.hbm.xml"/>
+  
+ </session-factory>
+</hibernate-configuration>

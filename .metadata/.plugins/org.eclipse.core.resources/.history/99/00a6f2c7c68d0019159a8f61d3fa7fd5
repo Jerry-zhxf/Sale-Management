@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-6-13 18:24:02 by Hibernate Tools 5.2.12.Final -->
+<hibernate-mapping>
+
+<class
+    name="org.zhxf.sale.domain.LocalTemporaryRecord"
+    table="local_temporary_record"
+    catalog="saletest"
+    optimistic-lock="version"
+>
+
+	<id 
+        name="orderNo"
+        type="string"
+    >
+    
+<column name="Order_no" length="25" />
+	    <generator class="assigned" />
+    </id>
+
+
+
+
+    <property
+        name="vipNo"
+	    type="string"
+    >
+<column name="VIP_no" length="11" />
+  </property>
+
+    <property
+        name="accuPoints"
+	    type="java.lang.Long"
+    >
+<column name="accu_points" />
+  </property>
+
+
+
+</class>
+
+</hibernate-mapping>

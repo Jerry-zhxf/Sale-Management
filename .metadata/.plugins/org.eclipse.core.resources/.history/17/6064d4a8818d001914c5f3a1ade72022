@@ -1,0 +1,78 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ include file="../../base.jsp"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<html>
+<head>
+</head>
+<%
+        String num1 = request.getParameter("num1");
+        String num2 = request.getParameter("num2");
+        String oper = request.getParameter("operator");
+        double res = 0;
+        if (num1!=null && num2!=null && oper!=null) {
+
+            double d_num1 = Double.parseDouble(num1);
+            double d_num2 = Double.parseDouble(num2);
+            if(oper.equals("+")) { res = d_num1 + d_num2; } 
+            else if (oper.equals("-")) { res = d_num1 - d_num2; } 
+            else if (oper.equals("*")) { res = d_num1 * d_num2; } 
+            else if (oper.equals("/")) { res = d_num1 / d_num2; }
+        }
+%>
+<body>
+<form action="vipdata/vipdataAction_update" class="form-horizontal" role="form" method="post">
+<div>
+	<ul class="nav nav-pills">
+	  <li><a href="#" onclick="formSubmit('vipdataAction_list','_self')"><img alt="add" src="${ctx }/img/back.png"></a></li>
+	  <li><a href="#" onclick="formSubmit('vipdataAction_update','_self')"><img alt="modify" src="${ctx }/img/save.png"></a></li>
+	</ul>
+</div>
+
+<!-- 隐藏域 userid -->
+<input type="hidden" name="vipNo" value="${vipNo }">
+
+<div style="margin: 10px">
+<div class="col-md-6">
+  <div class="form-group">
+		<label for="firstname" class="col-md-2 control-label">当前积分</label>
+		<div class="col-md-10">
+			<input type="text" class="form-control" id="firstname" 
+				   name="currentPoint" placeholder="请修改当前积分" value="${currentPoint }">
+		</div>
+  </div>
+  <div class="form-group">
+		<label for="firstname" class="col-md-2 control-label">总积分</label>
+		<div class="col-md-10">
+			<input type="text" class="form-control" id="firstname" 
+				   name="totalPoint" placeholder="请修改总积分" value="${totalPoint }">
+		</div>
+  </div>
+</div>
+</div>
+</form>
+</body>
+</html>
+
+<%-- 只保留变化的部分 --%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  </head>
+  
+  <body>
+
+    <form action="/CalJsp/MyCalInterface.jsp" method="post" onsubmit="return checkNum()">
+        <%-- 提交表单后，输入框内数字保留 --%>
+        请输入第一个数：<input type="text" id="num1" value="<%= num1==null?"":num1 %>" name="num1" /><br />
+        请输入第二个数：<input type="text" id="num2" value="<%= num2 %>" name="num2" /><br/> 
+        请选择运算符：<select name="operator">
+            <option>+</option>
+            <option>-</option>
+            <option>*</option>
+            <option>/</option>
+        </select><br/>
+        <input type="submit" onclick="return checkNum()" value="计算" />
+    </form>
+     结果是:<%= res %>
+  </body>
+</html>

@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-6-13 18:24:02 by Hibernate Tools 5.2.12.Final -->
+<hibernate-mapping>
+
+<class
+    name="org.zhxf.sale.domain.StoreInfo"
+    table="store_info"
+    catalog="saletest"
+    optimistic-lock="version"
+>
+
+	<id 
+        name="storeNo"
+        type="string"
+    >
+    
+<column name="Store_no" length="13" />
+	    <generator class="assigned" />
+    </id>
+
+
+
+
+    <property
+        name="storeName"
+	    type="string"
+    >
+<column name="Store_name" length="20" />
+  </property>
+
+    <property
+        name="storeAddr"
+	    type="string"
+    >
+<column name="Store_addr" length="20" />
+  </property>
+
+    <property
+        name="manager"
+	    type="string"
+    >
+<column name="Manager" length="20" />
+  </property>
+
+    <property
+        name="tel"
+	    type="string"
+    >
+<column name="Tel" length="55" />
+  </property>
+
+
+	<set name="sends"
+table="send"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="Store_no" length="13" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.Send"
+/>
+	</set>
+
+	<set name="transfersForInStoreNo"
+table="transfer"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="InStore_no" length="13" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.Transfer"
+/>
+	</set>
+
+	<set name="storeItemsales"
+table="store_itemsale"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="Store_no" length="13" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.StoreItemsale"
+/>
+	</set>
+
+	<set name="transfersForOutStoreNo"
+table="transfer"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="OutStore_no" length="13" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.Transfer"
+/>
+	</set>
+
+	<set name="presales"
+table="presale"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="Store_no" length="13" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.Presale"
+/>
+	</set>
+
+	<set name="storeStockInfos"
+table="store_stock_info"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="Store_no" length="13" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.StoreStockInfo"
+/>
+	</set>
+
+	<set name="staffInfos"
+table="staff_info"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="Store_no" length="13" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.StaffInfo"
+/>
+	</set>
+
+	<set name="sales"
+table="sale"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="Store_no" length="13" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.Sale"
+/>
+	</set>
+
+
+</class>
+
+</hibernate-mapping>

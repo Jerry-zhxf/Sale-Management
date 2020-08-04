@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-6-13 18:24:02 by Hibernate Tools 5.2.12.Final -->
+<hibernate-mapping>
+
+<class
+    name="org.zhxf.sale.domain.SupplyInfo"
+    table="supply_info"
+    catalog="saletest"
+    optimistic-lock="version"
+>
+
+	<id 
+        name="vendorNo"
+        type="string"
+    >
+    
+<column name="Vendor_no" length="16" />
+	    <generator class="assigned" />
+    </id>
+
+
+
+
+    <property
+        name="vendorName"
+	    type="string"
+    >
+<column name="Vendor_name" length="20" />
+  </property>
+
+    <property
+        name="vendorTel"
+	    type="string"
+    >
+<column name="Vendor_tel" length="55" />
+  </property>
+
+    <property
+        name="vendorEmail"
+	    type="string"
+    >
+<column name="Vendor_email" length="30" />
+  </property>
+
+    <property
+        name="vendorAddr"
+	    type="string"
+    >
+<column name="Vendor_addr" length="30" />
+  </property>
+
+
+	<set name="supplies"
+table="supply"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="Vendor_no" length="16" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.Supply"
+/>
+	</set>
+
+
+</class>
+
+</hibernate-mapping>

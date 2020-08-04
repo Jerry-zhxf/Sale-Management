@@ -1,0 +1,138 @@
+package org.zhxf.sale.web;
+
+
+import java.util.List;
+
+import org.zhxf.sale.domain.Transfer;
+import org.zhxf.sale.domain.TransferId;
+import org.zhxf.sale.domain.ItemInfo;
+import org.zhxf.sale.service.ItemInfoService;
+import org.zhxf.sale.service.TransferService;
+import org.zhxf.sale.utils.Page;
+
+import com.opensymphony.xwork2.ModelDriven;
+
+public class TransferAction extends BaseAction implements ModelDriven<TransferId> {
+
+	private static final long serialVersionUID = -628649677616338668L;
+	private TransferId model = new TransferId();
+	private Transfer model2 = new Transfer();
+
+	@Override
+	public TransferId getModel() {
+		return model;
+	}
+
+	// 分页查询
+	private Page<TransferId> page = new Page<TransferId>();
+	public Page<TransferId> getPage() {
+		return page;
+	}
+	public void setPage(Page<TransferId> page) {
+		this.page = page;
+	}
+
+	private TransferService transferService;
+	public void setTransferService(TransferService transferService) {
+		this.transferService = transferService;
+	}
+	private ItemInfoService itemInfoService;
+	public void setItemInfoService(ItemInfoService itemInfoService) {
+		this.itemInfoService = itemInfoService;
+	}
+
+	/**
+	 * 分页查询
+	 */
+	public String list() throws Exception {
+		String hql = "from Transfer";
+
+		transferService.findPage(hql, page, TransferId.class, null);
+
+		// 设置分页的url地址
+		page.setUrl("transferAction_list");
+
+		// 将page对象压入栈顶
+		super.push(page);
+		return "list";
+	}
+
+	/**
+	 * 查看
+	 */
+	public String toview() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		TransferId transferId = transferService.get(TransferId.class, model2.getId());
+
+		// 放入栈顶
+		super.push(transferId);
+
+		// 3.跳页面
+		return "toview";
+	}
+
+	/**
+	 * 进入新增页面
+	 */
+	public String tocreate() throws Exception {
+		List<Role> roles = roleService.find("from Role", Role.class, null);
+		
+		super.put("roles", roles);
+		
+		return "tocreate";
+	}
+
+	/**
+	 * 保存
+	 */
+	public String insert() throws Exception {
+		transferService.saveOrUpdate(model);
+		return "alist";
+	}
+
+	/**
+	 * 进入修改页面
+	 */
+	public String toupdate() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		TransferId transferId = transferService.get(TransferId.class, model2.getId());
+		super.push(transferId);
+		
+		//List<Role> roles = roleService.find("from Role", Role.class, null);
+		//super.put("roles", roles);
+				
+		return "toupdate";
+	}
+
+	/**
+	 * 修改
+	 */
+	public String update() throws Exception {
+		
+		// 1.调用业务方法，根据id,得到对象
+		TransferId transferId = transferService.get(TransferId.class, model2.getId());
+		Transfer transfer = null;
+		transferId.setOutStoreNo(model.getOutStoreNo());
+		transferId.setInStoreNo(model.getInStoreNo());
+		transferId.setItemNo(model.getItemNo());
+		transferId.setTransferDate(model.getTransferDate());
+		transfer.setTransferQty(model2.getTransferQty());
+		
+		transferService.saveOrUpdate(transferId);
+				
+		return "alist";
+	}
+
+	/**
+	 * 删除
+	 */
+	//联合主键待解决
+	public String delete() throws Exception {
+		String ids[] = model.getOutStoreNo().split(", ");
+		
+		//调用业务方法，实现批量删除
+		transferService.delete(TransferId.class, ids);
+		
+		return "alist";
+	}
+}

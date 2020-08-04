@@ -1,0 +1,18 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ include file="../../base.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="icform" class="form-horizontal"  method="post">
+<div>
+	<ul class="nav nav-pills">
+	  <li><a href="#" onclick="formSubmit('sendAction_list','_self')"><img alt="add" src="${ctx }/img/back.png"></a></li>
+	  <li><a href="#" onclick="formSubmit('sendAction_insert','_self')"><img alt="modify" src="${ctx }/img/save.png"></a></li>
+	</ul>
+</div>
+</body>
+</html>

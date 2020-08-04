@@ -1,0 +1,131 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ include file="../../base.jsp"%>
+<html>
+<head>
+	<script language = "javascript">
+		function checkNum(){
+		
+		//		alert("1");alert("0");
+			if(document.form1.num1.value == ""){  //注意这里只能使用 == 不能使用equals("")以为js中没有equals函数				alert("num为空");
+				return false;
+			}
+			//判断输入的的是不是数字
+			if(Math.round(document.form1.num1.value) != document.form1.num1.value){
+				alert("输入的不是num1数字类型。请核实");
+				return false;
+			}
+			
+			if(Math.round(document.form1.num2.value) != document.form1.num2.value){
+				alert("输入的不是num2数字类型。请核实");
+				return false;
+			}
+			if(document.form1.operator.value == "/" && document.form1.num2.value == 0){
+				alert("除数不能为0");
+				return false;
+			}
+			
+			
+		}
+	</script>
+</head>
+<body>
+<form action="vipdata/vipdataAction_update" class="form-horizontal" role="form" method="post">
+<div>
+	<ul class="nav nav-pills">
+	  <li><a href="#" onclick="formSubmit('vipdataAction_list','_self')"><img alt="add" src="${ctx }/img/back.png"></a></li>
+	  <li><a href="#" onclick="formSubmit('vipdataAction_update','_self')"><img alt="modify" src="${ctx }/img/save.png"></a></li>
+	</ul>
+</div>
+
+<!-- 隐藏域 userid -->
+<input type="hidden" name="vipNo" value="${vipNo }">
+
+<div style="margin: 10px">
+<div class="col-md-6">
+  <div class="form-group">
+		<label for="firstname" class="col-md-2 control-label">当前积分</label>
+		<div class="col-md-10">
+			<input type="text" class="form-control" id="firstname" 
+				   name="currentPoint" placeholder="请修改当前积分" value="${currentPoint }">
+		</div>
+  </div>
+  <div class="form-group">
+		<label for="firstname" class="col-md-2 control-label">总积分</label>
+		<div class="col-md-10">
+			<input type="text" class="form-control" id="firstname" 
+				   name="totalPoint" placeholder="请修改总积分" value="${totalPoint }">
+		</div>
+  </div>
+</div>
+</div>
+</form>
+<!-- 显示结果 -->
+			
+			<!-- 
+			<%
+				//接受第一个运算数
+				String strNum1 = request.getParameter("num1");
+				
+				//接受第二个云算数
+				String strNum2 = request.getParameter("num2");
+				//System.out.println("strNum2="+ strNum2);
+				//接受运算符
+				String operator = request.getParameter("operator");
+				//计算结果
+				int num11=0, num22=0,result=0;
+				
+				out.println("12345");
+				
+				if(strNum1 != null && strNum2 != null && operator != null){
+				out.println("不等于空=============");
+				//	return false;
+				try{
+					
+					num11 = Integer.parseInt(strNum1);
+					num22 = Integer.parseInt(strNum2);
+					
+					if(operator.equals("+")){
+						result = num11 + num22;
+					}else if(operator.equals("-")){
+						result = num11 - num22;
+					}else if(operator.equals("*")){
+						result = num11 * num22;
+					}else if(operator.equals("/")){
+						result = num11/num22;
+					}
+				
+				}catch(Exception e){
+					e.printStackTrace();
+					out.println("12345678");
+				}
+			
+			
+				//	 out.println(strNum1+operator+strNum2+"="+ result);
+		
+				}
+			 
+			  %>
+			  
+			   -->
+			
+			
+		<form name = "form1" action="./VipdataUpdate.jsp">
+		请输入第一个数：<input type="text" name="num1" value="<%=strNum1 %>"><br>
+		<select name = "operator">
+			<option value=+>+</option>
+			<option value=->-</option>
+			<option value=*>*</option>
+			<option value=/>/</option>
+			
+		</select><br>
+		请输入第二个数：<input type="text" name="num2"  value="<%=strNum2 %>"><br>
+		
+		
+		<input type=submit onclick="return checkNum()" value="等于">
+		
+		</form>
+		
+		 
+		结果：<%= strNum1%><%=operator %><%= strNum2%>=<%= result %>
+</body>
+</html>

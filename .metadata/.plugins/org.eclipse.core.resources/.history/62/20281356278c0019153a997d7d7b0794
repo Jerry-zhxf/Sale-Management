@@ -1,0 +1,6 @@
+package org.zhxf.sale.web;
+
+//门店信息
+public class StoreAction {
+
+}

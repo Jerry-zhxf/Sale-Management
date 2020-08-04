@@ -1,0 +1,184 @@
+package org.zhxf.sale.web;
+
+
+import java.util.List;
+
+import org.zhxf.sale.domain.Send;
+import org.zhxf.sale.domain.StoreInfo;
+import org.zhxf.sale.domain.StoreStockInfo;
+import org.zhxf.sale.service.SendService;
+import org.zhxf.sale.service.StoreInfoService;
+import org.zhxf.sale.service.StoreStockInfoService;
+import org.zhxf.sale.domain.Cpy;
+import org.zhxf.sale.service.CpyService;
+import org.zhxf.sale.domain.ItemInfo;
+import org.zhxf.sale.service.ItemInfoService;
+import org.zhxf.sale.utils.Page;
+
+import com.opensymphony.xwork2.ModelDriven;
+
+public class SendAction extends BaseAction implements ModelDriven<Send> {
+
+	private static final long serialVersionUID = -628649677616338668L;
+	private Send model = new Send();
+	private Cpy model1 = new Cpy();
+	private StoreStockInfo model2 = new StoreStockInfo();
+	
+	@Override
+	public Send getModel() {
+		return model;
+	}
+
+	// 分页查询
+	private Page<Send> page = new Page<Send>();
+	public Page<Send> getPage() {
+		return page;
+	}
+	public void setPage(Page<Send> page) {
+		this.page = page;
+	}
+
+	private SendService sendService;
+	public void setSendService(SendService sendService) {
+		this.sendService = sendService;
+	}
+	private CpyService cpyService;
+	public void setCpyService(CpyService cpyService) {
+		this.cpyService = cpyService;
+	}
+	private StoreInfoService storeInfoService;
+	public void setStoreInfoService(StoreInfoService storeInfoService) {
+		this.storeInfoService = storeInfoService;
+	}
+	private StoreStockInfoService ssService;
+	public void setSsService(StoreStockInfoService ssService) {
+		this.ssService = ssService;
+	}
+	private ItemInfoService itemInfoService;
+	public void setItemInfoService(ItemInfoService itemInfoService) {
+		this.itemInfoService = itemInfoService;
+	}
+
+	/**
+	 * 分页查询
+	 */
+	public String list() throws Exception {
+		String hql = "from Send";
+
+		sendService.findPage(hql, page, Send.class, null);
+
+		// 设置分页的url地址
+		page.setUrl("sendAction_list");
+
+		// 将page对象压入栈顶
+		super.push(page);
+		return "list";
+	}
+
+	/**
+	 * 查看
+	 */
+	public String toview() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		Send Send = sendService.get(Send.class, model.getId());
+
+		// 放入栈顶
+		super.push(Send);
+
+		// 3.跳页面
+		return "toview";
+	}
+
+	/**
+	 * 进入新增页面
+	 */
+	public String tocreate() throws Exception {
+		List<Cpy> itemInfo = cpyService.find("from Cpy", Cpy.class, null);
+		
+		super.put("itemInfo", itemInfo);
+		
+		List<StoreInfo> storeInfo = storeInfoService.find("from StoreInfo", StoreInfo.class, null);		
+		
+		super.put("storeInfo", storeInfo);
+		
+		return "tocreate";
+	}
+
+	/**
+	 * 保存
+	 */
+	public String insert() throws Exception {
+		if(model.getSendQty()==null) {
+			model.setSendQty(0L);
+		}
+		sendService.saveOrUpdate(model);
+		
+		if(ssService.get(StoreStockInfo.class, model.getStoreInfo().getStoreNo())==null||ssService.get(StoreStockInfo.class, model.getItemInfo().getItemNo())==null) {
+			model2.setItemInfo(model.getItemInfo());
+			//System.out.println(model1.getItemInfo());
+			model2.setStoreInfo(model.getStoreInfo());
+			//System.out.println(model1.getStockQty());
+			model2.setSalePrice(0f);
+			model2.setQuality(0L);
+			ssService.saveOrUpdate(model2);
+		}
+		Cpy cpy = cpyService.get(Cpy.class, model.getItemInfo().getItemNo());
+		
+		Long num = 0L;
+		if(cpy.getStockQty()!=0L) {
+			num = cpy.getStockQty();
+		}
+		cpy.setStockQty(num-model.getSendQty());
+		cpyService.saveOrUpdate(cpy);
+		
+		
+		
+		
+		//System.out.println(cpyService.get(Cpy.class, model.getItemInfo().getItemNo()));
+		return "alist";
+	}
+
+	/**
+	 * 进入修改页面
+	 */
+	public String toupdate() throws Exception {
+		// 1.调用业务方法，根据id,得到对象
+		Send Send = sendService.get(Send.class, model.getId());
+		super.push(Send);
+		
+//		List<Role> roles = roleService.find("from Role", Role.class, null);
+//		super.put("roles", roles);
+				
+		return "toupdate";
+	}
+
+	/**
+	 * 修改
+	 */
+//	public String update() throws Exception {
+//		
+//		// 1.调用业务方法，根据id,得到对象
+//		Send send = sendService.get(Send.class, model.getId());
+//		
+//		send.setStoreNo(model.getStoreNo());
+//		send.setItemNo(model.getItemNo());
+//		send.setSendDate(model.getSendDate());
+//		send.setSendQty(model.getSendQty());
+//		sendService.saveOrUpdate(Send);
+//				
+//		return "alist";
+//	}
+
+	/**
+	 * 删除
+	 */
+//	public String delete() throws Exception {
+//		String ids[] = model.getStoreNo().split(", ");
+//		
+//		//调用业务方法，实现批量删除
+//		sendService.delete(Send.class, ids);
+//		
+//		return "alist";
+//	}
+}
+

@@ -1,0 +1,71 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ include file="../base.jsp"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<html>
+<head>
+	<script language="javascript" src="${ctx}/js/calendar.js"></script>
+	<script language="javascript" src="${ctx}/js/WdatePicker.js"></script>
+</head>
+<body>
+<form action="icform" class="form-horizontal"  method="post">
+<div>
+	<ul class="nav nav-pills">
+	  <li><a href="#" onclick="formSubmit('presaleAction_list','_self')"><img alt="add" src="${ctx }/img/back.png"></a></li>
+	  <li><a href="#" onclick="formSubmit('presaleAction_insert','_self')"><img alt="modify" src="${ctx }/img/save.png"></a></li>
+	</ul>
+</div>
+
+<div style="margin: 10px">
+<div class="col-md-6">
+	<div class="form-group">
+    <label class="col-md-2 control-label">预售单号</label>
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="presale" placeholder="请输入预售单号，示例：1CHN300000001190522172815">
+    </div>
+  </div>
+  <div class="form-group">
+		<label class="col-md-2 control-label">会员号</label>
+		<div class="col-md-10">
+			<s:select cssClass="form-control" name="vip.vipNo" list="#vip" headerKey="" headerValue="--请选择--" listKey="vipNo" listValue="vipNo"></s:select>
+		</div>
+  </div>
+  <div class="form-group">
+		<label class="col-md-2 control-label">预售门店</label>
+		<div class="col-md-10">
+			<s:select cssClass="form-control" name="storeInfo.storeNo" list="#storeInfo" headerKey="" headerValue="--请选择--" listKey="storeNo" listValue="storeName"></s:select>
+		</div>
+  </div>
+  <div class="form-group">
+		<label class="col-md-2 control-label">预售商品名称</label>
+		<div class="col-md-10">
+			<s:select cssClass="form-control" name="itemInfo.itemNo" list="#itemInfo" headerKey="" headerValue="--请选择--" listKey="itemNo" listValue="itemName"></s:select>
+		</div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label">定金</label>
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="subscription" placeholder="请输入定金数额">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label">预售日期</label>
+    <div class="col-md-10">
+      <input type="text" name="reserveDate"  class="form-control" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="请选择预售时间">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label">是否支付尾款</label>
+    <div class="col-md-10">
+      <!-- <input type="number" class="form-control" name="isRemainder" placeholder="请确定其是否支付尾款">  -->
+      <select cssClass="form-control" name="isRemainder"  value="${isRemainder}">     
+  		<option value="0">-请选择-</option>     
+  		<option value="是" <c:if test="${'是' eq isRemainder}">selected</c:if> >是</option>     
+  		<option value="否" <c:if test="${'否' eq isRemainder}">selected</c:if> >否</option>  
+ 	</select>  
+    </div>
+  </div>
+</div>
+</div>
+</form>
+</body>
+</html>

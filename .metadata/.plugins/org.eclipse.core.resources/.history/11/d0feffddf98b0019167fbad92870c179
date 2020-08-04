@@ -1,0 +1,57 @@
+package org.zhxf.sale.service.impl;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+
+import org.lqz.sale.domain.StoreStockInfoId;
+import org.lqz.sale.service.StoreStockInfoService;
+import org.zhxf.sale.dao.BaseDao;
+import org.zhxf.sale.utils.Page;
+
+public class StoreStockInfoServiceImpl implements StoreStockInfoService {
+
+	private BaseDao baseDao;
+
+	public void setBaseDao(BaseDao baseDao) {
+		this.baseDao = baseDao;
+	}
+
+	@Override
+	public List<StoreStockInfoId> find(String hql, Class<StoreStockInfoId> entityClass, Object[] params) {
+		return baseDao.find(hql, entityClass, params);
+	}
+
+	@Override
+	public StoreStockInfoId get(Class<StoreStockInfoId> entityClass, Serializable id) {
+		return baseDao.get(entityClass, id);
+	}
+
+	@Override
+	public Page<StoreStockInfoId> findPage(String hql, Page<StoreStockInfoId> page, Class<StoreStockInfoId> entityClass, Object[] params) {
+		return baseDao.findPage(hql, page, entityClass, params);
+	}
+
+	@Override
+	public void saveOrUpdate(StoreStockInfoId entity) {
+		baseDao.saveOrUpdate(entity);
+	}
+
+	@Override
+	public void saveOrUpdateAll(Collection<StoreStockInfoId> entitys) {
+		baseDao.saveOrUpdateAll(entitys);
+	}
+
+	@Override
+	public void deleteById(Class<StoreStockInfoId> entityClass, Serializable id) {
+		baseDao.deleteById(entityClass, id);// 删除一个对象
+	}
+
+	@Override
+	public void delete(Class<StoreStockInfoId> entityClass, Serializable[] ids) {
+		for (Serializable id : ids) {
+			this.deleteById(StoreStockInfoId.class, id);
+		}
+	}
+
+}

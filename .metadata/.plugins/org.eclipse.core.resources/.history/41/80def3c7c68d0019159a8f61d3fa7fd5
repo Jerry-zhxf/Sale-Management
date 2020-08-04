@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-6-13 18:24:02 by Hibernate Tools 5.2.12.Final -->
+<hibernate-mapping>
+
+<class
+    name="org.zhxf.sale.domain.StaffInfo"
+    table="staff_info"
+    catalog="saletest"
+    optimistic-lock="version"
+>
+
+	<id 
+        name="staffNo"
+        type="string"
+    >
+    
+<column name="Staff_no" length="10" />
+	    <generator class="assigned" />
+    </id>
+
+
+
+
+    <many-to-one
+	    name="storeInfo"
+	    class="org.zhxf.sale.domain.StoreInfo"
+	    
+        fetch="select"
+    >
+<column name="Store_no" length="13" />
+   </many-to-one>
+    <property
+        name="staffName"
+	    type="string"
+    >
+<column name="Staff_name" length="20" />
+  </property>
+
+    <property
+        name="basicSalary"
+	    type="java.lang.Long"
+    >
+<column name="Basic_salary" />
+  </property>
+
+    <property
+        name="commission"
+	    type="java.lang.Long"
+    >
+<column name="Commission" />
+  </property>
+
+
+	<set name="sales"
+table="sale"
+	inverse="true"
+	lazy="true"	 		
+	 fetch="select"
+	>
+		<key
+		> 
+<column name="Staff_no" length="10" not-null="true" />
+		</key>
+<one-to-many class="org.zhxf.sale.domain.Sale"
+/>
+	</set>
+
+
+</class>
+
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+package org.lqz.sale.service;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+
+import org.lqz.sale.domain.OrderDetailId;
+import org.zhxf.sale.utils.Page;
+
+public interface OrderDetailService {
+	// 查询所有，带条件查询
+	public List<OrderDetailId> find(String hql, Class<OrderDetailId> entityClass, Object[] params);
+
+	// 获取一条记录
+	public OrderDetailId get(Class<OrderDetailId> entityClass, Serializable id);
+
+	// 分页查询，将数据封装到一个page分页工具类对象
+	public Page<OrderDetailId> findPage(String hql, Page<OrderDetailId> page, Class<OrderDetailId> entityClass, Object[] params);
+
+	// 新增和修改保存
+	public void saveOrUpdate(OrderDetailId entity);
+
+	// 批量新增和修改保存
+	public void saveOrUpdateAll(Collection<OrderDetailId> entitys);
+
+	// 单条删除，按id
+	public void deleteById(Class<OrderDetailId> entityClass, Serializable id);
+
+	// 批量删除
+	public void delete(Class<OrderDetailId> entityClass, Serializable[] ids);
+}

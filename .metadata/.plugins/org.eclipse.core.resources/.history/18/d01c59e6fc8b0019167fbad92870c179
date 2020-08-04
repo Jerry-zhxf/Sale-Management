@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.ui.theme" value="simple"/>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<package name="stock" namespace="/stock" extends="default">
+	
+		<action name="cstockAction_*" class="org.lqz.sale.web.CStockAction" method="{1}">
+		    <result name="list">/WEB-INF/pages/stock/cstock/cStockList.jsp</result>
+		    <result name="toview">/WEB-INF/pages/stock/cstock/cStockView.jsp</result>
+		    <result name="tocreate">/WEB-INF/pages/stock/cstock/cStockCreate.jsp</result>
+		    <result name="toupdate">/WEB-INF/pages/stock/cstock/cStockUpdate.jsp</result>
+		    <result name="alist" type="redirectAction">cstockAction_list</result>
+		</action>
+		
+ 		<action name="sstockAction_*" class="org.lqz.sale.web.SStockAction" method="{1}">
+		    <result name="list">/WEB-INF/pages/stock/sstock/sStockList.jsp</result>
+		    <result name="toview">/WEB-INF/pages/stock/sstock/sStockView.jsp</result>
+		    <result name="tocreate">/WEB-INF/pages/stock/sstock/sStockCreate.jsp</result>
+		    <result name="toupdate">/WEB-INF/pages/stock/sstock/sStockUpdate.jsp</result>
+		    <result name="alist" type="redirectAction">sstockAction_list</result>
+		</action>
+		
+	</package>
+
+	
+</struts>
+	

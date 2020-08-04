@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.ui.theme" value="simple"/>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<package name="default" namespace="/" extends="struts-default">
+		    
+		<action name="login" method="login" class="org.zhxf.sale.web.LoginAction">
+			<result name="login">/WEB-INF/pages/sysadmin/login/login.jsp</result>
+			<result name="success">/WEB-INF/pages/home/fmain.jsp</result>
+		</action>
+		<action name="logout" method="logout" class="org.zhxf.sale.web.LoginAction">
+			<result name="logout">/WEB-INF/pages/sysadmin/login/login.jsp</result>
+		</action>
+	
+		<action name="homeAction_*" method="{1}" class="org.zhxf.sale.web.HomeAction">
+			<result name="toTitle">/WEB-INF/pages/home/title.jsp</result>
+			<result name="toLeft">/WEB-INF/pages/${moduleName}/left.jsp</result>
+			<result name="toMain">/WEB-INF/pages/${moduleName}/main.jsp</result>
+		</action>
+		
+	</package>
+	
+	<include file="struts2/struts-home.xml"></include>
+	<include file="struts2/struts-presale.xml"></include>
+	<include file="struts2/struts-sale.xml"></include>
+	<include file="struts2/struts-stock.xml"></include>
+	<include file="struts2/struts-supple.xml"></include>
+	<include file="struts2/struts-transfer.xml"></include>
+	<include file="struts2/struts-user.xml"></include>
+	<include file="struts2/struts-vipmanage.xml"></include>
+	
+	
+</struts>
+	

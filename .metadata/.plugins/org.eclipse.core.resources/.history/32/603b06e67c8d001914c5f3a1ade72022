@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.ui.theme" value="simple"/>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<package name="vipmanage" namespace="/vipmanage" extends="default">
+	
+		<action name="vipdataAction_*" class="org.zhxf.sale.web.VipdataAction" method="{1}">
+		    <result name="list">/WEB-INF/pages/vipmanage/vipdata/VipdataList.jsp</result>
+		    <result name="toview">/WEB-INF/pages/vipmanage/vipdata/VipdataView.jsp</result>
+		    <result name="tocreate">/WEB-INF/pages/vipmanage/vipdata/VipdataCreate.jsp</result>
+		    <result name="toupdate">/WEB-INF/page/vipmanage/vipdata/VipdataUpdate.jsp</result>
+		    <result name="alist" type="redirectAction">vipdataAction_list</result>
+		</action>
+		
+ 		<action name="vipdegreeAction_*" class="org.zhxf.sale.web.VipdegreeAction" method="{1}">
+		    <result name="list">/WEB-INF/pages/vipmanage/vipdegree/VipdegreeList.jsp</result>
+		    <result name="toview">/WEB-INF/pages/vipmanage/vipdegree/VipdegreeView.jsp</result>
+		    <result name="tocreate">/WEB-INF/pages/vipmanage/vipdegree/VipdegreeCreate.jsp</result>
+		    <result name="toupdate">/WEB-INF/pages/vipmanage/vipdegree/VipdegreeUpdate.jsp</result>
+		    <result name="alist" type="redirectAction">vipdegreeAction_list</result>
+		</action>
+		
+	</package>
+
+	
+</struts>
+	

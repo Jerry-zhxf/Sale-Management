@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.ui.theme" value="simple"/>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<package name="transfer" namespace="/transfer" extends="default">
+	
+		<action name="adjustAction_*" class="org.lqz.sale.web.AdjustAction" method="{1}">
+		    <result name="list">/WEB-INF/pages/transfer/adjust/AdjustList.jsp</result>
+		    <result name="toview">/WEB-INF/pages/transfer/adjust/AdjustView.jsp</result>
+		    <result name="tocreate">/WEB-INF/pages/transfer/adjust/AdjustCreate.jsp</result>
+		    <result name="toupdate">/WEB-INF/pages/transfer/adjust/AdjustUpdate.jsp</result>
+		    <result name="alist" type="redirectAction">adjustAction_list</result>
+		</action>
+		
+ 		<action name="deliverAction_*" class="org.lqz.sale.web.DeliverAction" method="{1}">
+		    <result name="list">/WEB-INF/pages/transfer/deliver/DeliverList.jsp</result>
+		    <result name="toview">/WEB-INF/pages/transfer/deliver/DeliverView.jsp</result>
+		    <result name="tocreate">/WEB-INF/pages/transfer/deliver/DeliverCreate.jsp</result>
+		    <result name="toupdate">/WEB-INF/pages/transfer/deliver/DeliverUpdate.jsp</result>
+		    <result name="alist" type="redirectAction">deliverAction_list</result>
+		</action>
+		
+	</package>
+
+	
+</struts>
+	

@@ -1,0 +1,6 @@
+package org.zhxf.sale.web;
+
+//员工信息
+public class StaffAction {
+
+}

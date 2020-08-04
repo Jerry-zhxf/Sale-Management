@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 2019-6-13 18:24:02 by Hibernate Tools 5.2.12.Final -->
+<hibernate-mapping>
+
+<class
+    name="org.zhxf.sale.domain.Transfer"
+    table="transfer"
+    catalog="saletest"
+    optimistic-lock="version"
+>
+
+    <composite-id
+		name="id"
+        class="org.zhxf.sale.domain.TransferId"
+    >		
+	        <key-property name="outStoreNo" type="string">
+<column name="OutStore_no" length="13" />
+	        </key-property>
+	        <key-property name="inStoreNo" type="string">
+<column name="InStore_no" length="13" />
+	        </key-property>
+	        <key-property name="itemNo" type="string">
+<column name="Item_no" length="13" />
+	        </key-property>
+    </composite-id>	
+
+
+
+
+    <many-to-one
+	    name="itemInfo"
+	    class="org.zhxf.sale.domain.ItemInfo"
+	    
+        update="false"
+        insert="false"
+        fetch="select"
+    >
+<column name="Item_no" length="13" not-null="true" />
+   </many-to-one>
+    <many-to-one
+	    name="storeInfoByInStoreNo"
+	    class="org.zhxf.sale.domain.StoreInfo"
+	    
+        update="false"
+        insert="false"
+        fetch="select"
+    >
+<column name="InStore_no" length="13" not-null="true" />
+   </many-to-one>
+    <many-to-one
+	    name="storeInfoByOutStoreNo"
+	    class="org.zhxf.sale.domain.StoreInfo"
+	    
+        update="false"
+        insert="false"
+        fetch="select"
+    >
+<column name="OutStore_no" length="13" not-null="true" />
+   </many-to-one>
+    <property
+        name="transferDate"
+	    type="timestamp"
+    >
+<column name="Transfer_date" length="19" not-null="true" />
+  </property>
+
+    <property
+        name="transferQty"
+	    type="java.lang.Long"
+    >
+<column name="Transfer_qty" />
+  </property>
+
+
+
+</class>
+
+</hibernate-mapping>

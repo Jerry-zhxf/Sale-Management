@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.lqz.sale.domain.Cpy"/>
+<fullyQualifiedTypeName name="org.lqz.sale.domain.Degree"/>
+<fullyQualifiedTypeName name="org.lqz.sale.domain.DeliveryId"/>
+<fullyQualifiedTypeName name="org.lqz.sale.domain.SendId"/>
+<fullyQualifiedTypeName name="org.lqz.sale.domain.StoreInfo"/>
+<fullyQualifiedTypeName name="org.zhxf.sale.domain.ItemInfo"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="org.zhxf.sale.domain.Supply"/>
+<fullyQualifiedTypeName name="org.zhxf.sale.domain.SupplyId"/>
+<fullyQualifiedTypeName name="org.zhxf.sale.domain.StoreStockInfoId"/>
+<fullyQualifiedTypeName name="org.zhxf.sale.domain.TransferId"/>
+<fullyQualifiedTypeName name="org.hibernate.mapping.Set"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+<fullyQualifiedTypeName name="org.apache.struts2.ServletActionContext"/>
+</qualifiedTypeNameHistroy>

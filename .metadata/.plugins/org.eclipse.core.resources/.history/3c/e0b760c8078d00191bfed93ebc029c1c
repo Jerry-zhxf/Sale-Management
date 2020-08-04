@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2019-6-12 19:40:37 by Hibernate Tools 5.2.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="saletest" dynamic-insert="false" dynamic-update="false" mutable="true" name="org.zhxf.sale.domain.SupplyInfo" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="supply_info">
+        <id name="vendorNo" type="string">
+            <column length="16" name="Vendor_no"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="vendorName" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="Vendor_name"/>
+        </property>
+        <property generated="never" lazy="false" name="vendorTel" optimistic-lock="true" type="string" unique="false">
+            <column length="55" name="Vendor_tel"/>
+        </property>
+        <property generated="never" lazy="false" name="vendorEmail" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="Vendor_email"/>
+        </property>
+        <property generated="never" lazy="false" name="vendorAddr" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="Vendor_addr"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="supplies" optimistic-lock="true" sort="unsorted" table="supply">
+            <key on-delete="noaction">
+                <column length="16" name="Vendor_no" not-null="true"/>
+            </key>
+            <one-to-many class="org.zhxf.sale.domain.Supply" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

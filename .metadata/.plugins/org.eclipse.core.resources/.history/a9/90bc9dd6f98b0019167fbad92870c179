@@ -1,0 +1,57 @@
+package org.lqz.sale.service.impl;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+
+import org.lqz.sale.domain.LocalTemporaryRecord;
+import org.lqz.sale.service.LocalTemporaryRecordService;
+import org.zhxf.sale.dao.BaseDao;
+import org.zhxf.sale.utils.Page;
+
+public class LocalTemporaryRecordServiceImpl implements LocalTemporaryRecordService {
+
+	private BaseDao baseDao;
+
+	public void setBaseDao(BaseDao baseDao) {
+		this.baseDao = baseDao;
+	}
+
+	@Override
+	public List<LocalTemporaryRecord> find(String hql, Class<LocalTemporaryRecord> entityClass, Object[] params) {
+		return baseDao.find(hql, entityClass, params);
+	}
+
+	@Override
+	public LocalTemporaryRecord get(Class<LocalTemporaryRecord> entityClass, Serializable id) {
+		return baseDao.get(entityClass, id);
+	}
+
+	@Override
+	public Page<LocalTemporaryRecord> findPage(String hql, Page<LocalTemporaryRecord> page, Class<LocalTemporaryRecord> entityClass, Object[] params) {
+		return baseDao.findPage(hql, page, entityClass, params);
+	}
+
+	@Override
+	public void saveOrUpdate(LocalTemporaryRecord entity) {
+		baseDao.saveOrUpdate(entity);
+	}
+
+	@Override
+	public void saveOrUpdateAll(Collection<LocalTemporaryRecord> entitys) {
+		baseDao.saveOrUpdateAll(entitys);
+	}
+
+	@Override
+	public void deleteById(Class<LocalTemporaryRecord> entityClass, Serializable id) {
+		baseDao.deleteById(entityClass, id);// 删除一个对象
+	}
+
+	@Override
+	public void delete(Class<LocalTemporaryRecord> entityClass, Serializable[] ids) {
+		for (Serializable id : ids) {
+			this.deleteById(LocalTemporaryRecord.class, id);
+		}
+	}
+
+}
